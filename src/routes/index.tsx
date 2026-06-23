@@ -558,6 +558,8 @@ function MusicPlayer() {
 
 /* ---------------- Final Section ---------------- */
 function FinalSection() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   const fireflies = useMemo(
     () =>
       Array.from({ length: 22 }, (_, i) => ({
@@ -574,7 +576,7 @@ function FinalSection() {
   return (
     <section className="relative z-10 overflow-hidden py-32 text-center">
       <div className="absolute inset-0">
-        {fireflies.map((f) => (
+        {mounted && fireflies.map((f) => (
           <span
             key={f.key}
             className="firefly"
