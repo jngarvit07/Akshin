@@ -54,7 +54,7 @@ function Akshin() {
       <MusicPlayer />
       <FinalSection />
       <footer className="relative z-10 py-10 text-center text-xs text-muted-foreground">
-        Made with <span className="text-soft-pink">♥</span> for Akshin · 25.06.2021 — 25.06.2026
+        Made with <span className="text-soft-pink">♥</span> · Anish &amp; Kinshu · 25.06.2021 — 25.06.2026
       </footer>
     </main>
   );
@@ -77,6 +77,8 @@ function CursorGlow() {
 
 /* ---------------- Particles ---------------- */
 function Particles() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   const dots = useMemo(
     () =>
       Array.from({ length: 28 }, (_, i) => ({
@@ -88,6 +90,7 @@ function Particles() {
       })),
     []
   );
+  if (!mounted) return null;
   return (
     <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
       {dots.map((d) => (
@@ -139,6 +142,18 @@ function Hero() {
         >
           Akshin
         </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 1.0 }}
+          className="mt-4 font-serif text-xl italic text-foreground/85 sm:text-2xl"
+        >
+          <span className="text-gold">Anish</span>
+          <span className="mx-3 text-soft-pink">&amp;</span>
+          <span className="text-gold">Kinshu</span>
+        </motion.p>
+
 
         <motion.div
           initial={{ opacity: 0, scaleX: 0 }}
@@ -463,9 +478,9 @@ function Letter() {
         <button onClick={() => setOpen(true)} className="group" aria-label="Open the letter">
           <div className={`envelope ${open ? "open" : ""} transition-transform group-hover:-translate-y-1`}>
             <div className="envelope-flap" />
-            <div className="envelope-seal">A</div>
+            <div className="envelope-seal">A&amp;K</div>
             <div className="absolute inset-x-6 bottom-6 top-12 rounded-md bg-[#f8f2ea] p-4 text-left text-[10px] leading-relaxed text-[#3a2a22] shadow-inner">
-              <div className="font-serif text-base">To Akshin</div>
+              <div className="font-serif text-base">Anish &amp; Kinshu</div>
               <div className="shimmer my-2" />
               <div className="opacity-70">Five years. Infinite love.</div>
             </div>
@@ -555,6 +570,8 @@ function MusicPlayer() {
 
 /* ---------------- Final Section ---------------- */
 function FinalSection() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   const fireflies = useMemo(
     () =>
       Array.from({ length: 22 }, (_, i) => ({
@@ -571,7 +588,7 @@ function FinalSection() {
   return (
     <section className="relative z-10 overflow-hidden py-32 text-center">
       <div className="absolute inset-0">
-        {fireflies.map((f) => (
+        {mounted && fireflies.map((f) => (
           <span
             key={f.key}
             className="firefly"
