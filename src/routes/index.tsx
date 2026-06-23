@@ -77,6 +77,8 @@ function CursorGlow() {
 
 /* ---------------- Particles ---------------- */
 function Particles() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   const dots = useMemo(
     () =>
       Array.from({ length: 28 }, (_, i) => ({
@@ -88,6 +90,7 @@ function Particles() {
       })),
     []
   );
+  if (!mounted) return null;
   return (
     <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
       {dots.map((d) => (
