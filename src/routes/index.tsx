@@ -143,6 +143,16 @@ function Hero() {
           Akshin
         </motion.h1>
 
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 1.0 }}
+          className="mt-4 font-serif text-xl italic text-foreground/85 sm:text-2xl"
+        >
+          <span className="text-gold">Anish</span>
+          <span className="mx-3 text-soft-pink">&amp;</span>
+          <span className="text-gold">Kinshu</span>
+
         <motion.div
           initial={{ opacity: 0, scaleX: 0 }}
           animate={{ opacity: 1, scaleX: 1 }}
