@@ -152,6 +152,8 @@ function Hero() {
           <span className="text-gold">Anish</span>
           <span className="mx-3 text-soft-pink">&amp;</span>
           <span className="text-gold">Kinshu</span>
+        </motion.p>
+
 
         <motion.div
           initial={{ opacity: 0, scaleX: 0 }}
