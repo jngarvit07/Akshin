@@ -12,6 +12,7 @@ import rose from "@/assets/rose.jpg";
 import h1 from "@/assets/h1.jpg";
 import h2 from "@/assets/h2.jpg";
 import h3 from "@/assets/h3.jpg";
+import v1 from "@/assets/Videoes/v1.mp4";
 
 const START = new Date("2021-06-25T00:00:00");
 const TARGET = new Date("2026-06-25T00:00:00");
@@ -377,7 +378,8 @@ function Gallery() {
     { src: y4, video: undefined },
     { src: y5, video: undefined },
     { src: y6, video: undefined },
-    { src: rose, video: "/assets/Videoes/v1.MOV" },
+    { src: rose, video: undefined },
+    { src: v1, video: v1 },
   ];
   const [active, setActive] = useState<number | null>(null);
   return (
@@ -460,11 +462,6 @@ function GalleryCard({
             loop
             playsInline
           />
-          <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-100">
-            <div className="rounded-full bg-soft-pink/20 p-3 backdrop-blur-sm">
-              <span className="text-2xl text-soft-pink">▶</span>
-            </div>
-          </div>
         </>
       ) : (
         <img
