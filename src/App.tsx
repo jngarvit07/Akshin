@@ -426,15 +426,47 @@ function GalleryCard({
   onClick: () => void;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isInView, setIsInView] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (!containerRef.current || !item.video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+        if (entry.isIntersecting && isMobile && videoRef.current) {
+          videoRef.current.play().catch(() => {});
+        } else if (!entry.isIntersecting && videoRef.current) {
+          videoRef.current.pause();
+          videoRef.current.currentTime = 0;
+        }
+      },
+      { threshold: 0.5 },
+    );
+
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, [isMobile, item.video]);
 
   const handleMouseEnter = () => {
-    if (videoRef.current && item.video) {
+    if (videoRef.current && item.video && !isMobile) {
       videoRef.current.play().catch(() => {});
     }
   };
 
   const handleMouseLeave = () => {
-    if (videoRef.current) {
+    if (videoRef.current && !isMobile) {
       videoRef.current.pause();
       videoRef.current.currentTime = 0;
     }
@@ -442,6 +474,7 @@ function GalleryCard({
 
   return (
     <motion.button
+      ref={containerRef}
       onClick={onClick}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
