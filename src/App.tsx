@@ -22,9 +22,9 @@ import v3 from "@/assets/Videoes/v3.mp4";
 import audio from "@/assets/Sukoon Mila.mp3";
 
 const START = new Date("2021-06-25T00:00:00");
-const TARGET = new Date("2026-06-24T18:59:59");
+const TARGET = new Date("2026-06-24T19:07:59");
 // EDITABLE: Change this to control when all sections unlock
-const UNLOCK_TIME = new Date("2026-06-24T18:59:59");
+const UNLOCK_TIME = new Date("2026-06-24T19:07:59");
 
 const timeline = [
   {
@@ -926,7 +926,7 @@ function LoveBurst() {
               {/* Circular images */}
               {images.map((img, idx) => {
                 const angle = (idx / images.length) * Math.PI * 2;
-                const radius = 200;
+                const radius = 180;
                 const x = Math.cos(angle) * radius;
                 const y = Math.sin(angle) * radius;
 
@@ -963,7 +963,7 @@ function LoveBurst() {
               {/* Decorative hearts around */}
               {[...Array(8)].map((_, i) => {
                 const angle = (i / 8) * Math.PI * 2;
-                const radius = 200;
+                const radius = 180;
                 const x = Math.cos(angle) * radius;
                 const y = Math.sin(angle) * radius;
 
