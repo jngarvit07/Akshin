@@ -12,6 +12,9 @@ import rose from "@/assets/rose.jpg";
 import h1 from "@/assets/h1.jpg";
 import h2 from "@/assets/h2.jpg";
 import h3 from "@/assets/h3.jpg";
+import v1 from "@/assets/Videoes/v1.MOV";
+import v2 from "@/assets/Videoes/v2.MOV";
+import v3 from "@/assets/Videoes/v3.MOV";
 
 const START = new Date("2021-06-25T00:00:00");
 const TARGET = new Date("2026-06-25T00:00:00");
@@ -377,7 +380,8 @@ function Gallery() {
     { src: y4, video: undefined },
     { src: y5, video: undefined },
     { src: y6, video: undefined },
-    { src: rose, video: "/assets/Videoes/v1.MOV" },
+    // { src: rose, video: "/assets/Videoes/v1.MOV" },
+    { src: v1, video: "/assets/Videoes/v1.MOV" },
   ];
   const [active, setActive] = useState<number | null>(null);
   return (
