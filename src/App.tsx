@@ -22,9 +22,9 @@ import v3 from "@/assets/Videoes/v3.mp4";
 import audio from "@/assets/Sukoon Mila.mp3";
 
 const START = new Date("2021-06-25T00:00:00");
-const TARGET = new Date("2026-06-24T18:34:00");
+const TARGET = new Date("2026-06-24T18:55:00");
 // EDITABLE: Change this to control when all sections unlock
-const UNLOCK_TIME = new Date("2026-06-24T18:34:00");
+const UNLOCK_TIME = new Date("2026-06-24T18:55:00");
 
 const timeline = [
   {
