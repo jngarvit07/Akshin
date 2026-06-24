@@ -60,9 +60,11 @@ bun run start    # preview the production build
 This project uses **TanStack Start (SSR)**, which is not a pure static export, so it does **not** drop straight onto GitHub Pages.
 
 ### Option A — Lovable / Vercel / Netlify / Cloudflare (recommended)
+
 Push the repo and connect it. Build command `bun run build` is auto-detected.
 
 ### Option B — Make it static for GitHub Pages
+
 If you only need the single page (no server functions):
 
 1. Replace TanStack Start with a plain `vite + @vitejs/plugin-react` setup.
@@ -98,16 +100,16 @@ src/
 
 ## 🎨 Customize
 
-| What                | Where                                                             |
-| ------------------- | ----------------------------------------------------------------- |
-| Names               | `src/routes/index.tsx` (hero, footer, letter)                     |
-| Anniversary dates   | `START` and `TARGET` constants near the top of `index.tsx`        |
-| Timeline chapters   | `timeline` array                                                  |
-| Special moments     | `moments` array                                                   |
-| Letter text         | `LETTER` constant                                                 |
-| Photos              | replace files in `src/assets/`                                    |
-| Colors / fonts      | `src/styles.css` (`--rose-gold`, `--soft-pink`, `--font-serif`)   |
-| Music track         | `<audio src="...">` inside `MusicPlayer`                          |
+| What              | Where                                                           |
+| ----------------- | --------------------------------------------------------------- |
+| Names             | `src/routes/index.tsx` (hero, footer, letter)                   |
+| Anniversary dates | `START` and `TARGET` constants near the top of `index.tsx`      |
+| Timeline chapters | `timeline` array                                                |
+| Special moments   | `moments` array                                                 |
+| Letter text       | `LETTER` constant                                               |
+| Photos            | replace files in `src/assets/`                                  |
+| Colors / fonts    | `src/styles.css` (`--rose-gold`, `--soft-pink`, `--font-serif`) |
+| Music track       | `<audio src="...">` inside `MusicPlayer`                        |
 
 ---
 

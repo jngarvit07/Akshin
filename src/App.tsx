@@ -16,18 +16,51 @@ const START = new Date("2021-06-25T00:00:00");
 const TARGET = new Date("2026-06-25T00:00:00");
 
 const timeline = [
-  { year: "2021", title: "The Beginning", text: "Two strangers, one sunset, a thousand quiet sparks. Where it all started.", img: y1 },
-  { year: "2022", title: "Growing Together", text: "Late-night talks, golden walks, learning the language only we speak.", img: y2 },
-  { year: "2023", title: "Our Adventures", text: "New cities, mountain air, and a map we kept rewriting with every trip.", img: y3 },
-  { year: "2024", title: "Becoming Stronger", text: "Through every storm, we found shelter in each other. Always.", img: y4 },
-  { year: "2025", title: "Forever, In Progress", text: "Promises whispered, dreams shared, a future we are quietly building.", img: y5 },
+  {
+    year: "2021",
+    title: "The Beginning",
+    text: "Two strangers, one sunset, a thousand quiet sparks. Where it all started.",
+    img: y1,
+  },
+  {
+    year: "2022",
+    title: "Growing Together",
+    text: "Late-night talks, golden walks, learning the language only we speak.",
+    img: y2,
+  },
+  {
+    year: "2023",
+    title: "Our Adventures",
+    text: "New cities, mountain air, and a map we kept rewriting with every trip.",
+    img: y3,
+  },
+  {
+    year: "2024",
+    title: "Becoming Stronger",
+    text: "Through every storm, we found shelter in each other. Always.",
+    img: y4,
+  },
+  {
+    year: "2025",
+    title: "Forever, In Progress",
+    text: "Promises whispered, dreams shared, a future we are quietly building.",
+    img: y5,
+  },
 ];
 
 const moments = [
   { date: "Jun 25, 2021", title: "First Hello", text: "The day everything began." },
   { date: "Dec 31, 2022", title: "Our First New Year", text: "Midnight kisses under city lights." },
-  { date: "Aug 14, 2023", title: "The Mountain Trip", text: "Where we left our hearts above the clouds." },
-  { date: "Feb 14, 2024", title: "Letters & Roses", text: "A quiet Valentine that meant everything." },
+  {
+    date: "Aug 14, 2023",
+    title: "The Mountain Trip",
+    text: "Where we left our hearts above the clouds.",
+  },
+  {
+    date: "Feb 14, 2024",
+    title: "Letters & Roses",
+    text: "A quiet Valentine that meant everything.",
+  },
   { date: "Jun 25, 2026", title: "5 Years", text: "And this is only the beginning." },
 ];
 
@@ -46,7 +79,8 @@ function App() {
       <MusicPlayer />
       <FinalSection />
       <footer className="relative z-10 py-10 text-center text-xs text-muted-foreground">
-        Made with <span className="text-soft-pink">♥</span> · Anish &amp; Kinshu · 25.06.2021 — 25.06.2026
+        Made with <span className="text-soft-pink">♥</span> · Anish &amp; Kinshu · 25.06.2021 —
+        25.06.2026
       </footer>
     </main>
   );
@@ -78,7 +112,7 @@ function Particles() {
         size: 2 + Math.random() * 5,
         key: i,
       })),
-    []
+    [],
   );
   if (!mounted) return null;
   return (
@@ -176,7 +210,9 @@ function Hero() {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.97 }}
           className="glow-ring mt-10 inline-block rounded-full border border-rose-gold/50 bg-background/40 px-8 py-3 text-sm uppercase tracking-[0.3em] text-foreground backdrop-blur-md transition-colors hover:bg-rose-gold/20"
-          style={{ background: "linear-gradient(135deg, rgba(248,200,220,.1), rgba(212,175,140,.15))" }}
+          style={{
+            background: "linear-gradient(135deg, rgba(248,200,220,.1), rgba(212,175,140,.15))",
+          }}
         >
           Begin Our Story
         </motion.a>
@@ -274,7 +310,9 @@ function TimelineRow({ item, index }: { item: (typeof timeline)[number]; index: 
       className={`relative grid items-center gap-8 md:grid-cols-2 ${isRight ? "md:[&>*:first-child]:order-2" : ""}`}
     >
       <div className={`pl-12 md:pl-0 ${isRight ? "md:pl-12" : "md:pr-12 md:text-right"}`}>
-        <div className="text-rose-gold font-serif text-6xl leading-none opacity-80">{item.year}</div>
+        <div className="text-rose-gold font-serif text-6xl leading-none opacity-80">
+          {item.year}
+        </div>
         <h3 className="text-gold mt-2 font-serif text-3xl">{item.title}</h3>
         <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground md:ml-auto md:max-w-sm">
           {item.text}
@@ -286,7 +324,12 @@ function TimelineRow({ item, index }: { item: (typeof timeline)[number]; index: 
         transition={{ type: "spring", stiffness: 200, damping: 20 }}
         className="glass glow-ring relative ml-12 overflow-hidden md:ml-0 aspect-[4/5]"
       >
-        <img src={item.img} alt={item.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 hover:scale-110" />
+        <img
+          src={item.img}
+          alt={item.title}
+          loading="lazy"
+          className="h-full w-full object-cover transition-transform duration-700 hover:scale-110"
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
         <div className="absolute bottom-4 left-4 text-xs uppercase tracking-[0.3em] text-soft-pink">
           Chapter {index + 1}
@@ -316,7 +359,12 @@ function Gallery() {
             whileHover={{ scale: 1.02 }}
             className="glass group relative block w-full overflow-hidden break-inside-avoid"
           >
-            <img src={src} alt="" loading="lazy" className="w-full transition-transform duration-700 group-hover:scale-110" />
+            <img
+              src={src}
+              alt=""
+              loading="lazy"
+              className="w-full transition-transform duration-700 group-hover:scale-110"
+            />
             <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
             <div className="absolute bottom-3 left-3 translate-y-2 text-xs uppercase tracking-[0.3em] text-soft-pink opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100">
               Memory #{String(i + 1).padStart(2, "0")}
@@ -368,7 +416,9 @@ function Moments() {
             <div className="text-xs uppercase tracking-[0.3em] text-rose-gold">{m.date}</div>
             <h3 className="text-gold mt-3 font-serif text-2xl">{m.title}</h3>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{m.text}</p>
-            <div className="heart-pulse absolute -bottom-4 -right-4 text-6xl text-soft-pink/15">♥</div>
+            <div className="heart-pulse absolute -bottom-4 -right-4 text-6xl text-soft-pink/15">
+              ♥
+            </div>
           </motion.div>
         ))}
       </div>
@@ -397,7 +447,7 @@ function AnimatedNumber({ to }: { to: number }) {
           io.disconnect();
         }
       },
-      { threshold: 0.4 }
+      { threshold: 0.4 },
     );
     io.observe(el);
     return () => io.disconnect();
@@ -466,7 +516,9 @@ function Letter() {
       <Heading eyebrow="A Letter For You" title="Words From My Heart" />
       <div className="mt-12 flex flex-col items-center gap-8">
         <button onClick={() => setOpen(true)} className="group" aria-label="Open the letter">
-          <div className={`envelope ${open ? "open" : ""} transition-transform group-hover:-translate-y-1`}>
+          <div
+            className={`envelope ${open ? "open" : ""} transition-transform group-hover:-translate-y-1`}
+          >
             <div className="envelope-flap" />
             <div className="envelope-seal">A&amp;K</div>
             <div className="absolute inset-x-6 bottom-6 top-12 rounded-md bg-[#f8f2ea] p-4 text-left text-[10px] leading-relaxed text-[#3a2a22] shadow-inner">
@@ -536,7 +588,11 @@ function MusicPlayer() {
           className={`relative grid h-11 w-11 place-items-center overflow-hidden rounded-full border border-rose-gold/40 bg-background ${playing ? "spin-slow" : "spin-slow spin-paused"}`}
           aria-label={playing ? "Pause music" : "Play music"}
         >
-          <img src={rose} alt="" className="absolute inset-0 h-full w-full object-cover opacity-70" />
+          <img
+            src={rose}
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover opacity-70"
+          />
           <span className="relative z-10 text-sm">{playing ? "❚❚" : "▶"}</span>
         </button>
         <div className="hidden sm:block">
@@ -571,27 +627,28 @@ function FinalSection() {
         delay: Math.random() * 4,
         dur: 4 + Math.random() * 5,
       })),
-    []
+    [],
   );
   return (
     <section className="relative z-10 overflow-hidden py-32 text-center">
       <div className="absolute inset-0">
-        {mounted && fireflies.map((f) => (
-          <span
-            key={f.key}
-            className="firefly"
-            style={
-              {
-                top: `${f.top}%`,
-                left: `${f.left}%`,
-                animationDelay: `${f.delay}s`,
-                animationDuration: `${f.dur}s`,
-                ["--dx" as string]: f.dx,
-                ["--dy" as string]: f.dy,
-              } as React.CSSProperties
-            }
-          />
-        ))}
+        {mounted &&
+          fireflies.map((f) => (
+            <span
+              key={f.key}
+              className="firefly"
+              style={
+                {
+                  top: `${f.top}%`,
+                  left: `${f.left}%`,
+                  animationDelay: `${f.delay}s`,
+                  animationDuration: `${f.dur}s`,
+                  ["--dx" as string]: f.dx,
+                  ["--dy" as string]: f.dy,
+                } as React.CSSProperties
+              }
+            />
+          ))}
       </div>
 
       <motion.div
