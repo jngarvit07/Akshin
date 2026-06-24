@@ -56,19 +56,36 @@ const timeline = [
 ];
 
 const moments = [
-  { date: "Jun 25, 2021", title: "First Hello", text: "The day everything began." },
-  { date: "Dec 31, 2022", title: "Our First New Year", text: "Midnight kisses under city lights." },
+  {
+    date: "Jun 25, 2021",
+    title: "First Hello",
+    text: "The day everything began.",
+    video: undefined,
+  },
+  {
+    date: "Dec 31, 2022",
+    title: "Our First New Year",
+    text: "Midnight kisses under city lights.",
+    video: undefined,
+  },
   {
     date: "Aug 14, 2023",
     title: "The Mountain Trip",
     text: "Where we left our hearts above the clouds.",
+    video: undefined,
   },
   {
     date: "Feb 14, 2024",
     title: "Letters & Roses",
     text: "A quiet Valentine that meant everything.",
+    video: undefined,
   },
-  { date: "Jun 25, 2026", title: "5 Years", text: "And this is only the beginning." },
+  {
+    date: "Jun 25, 2026",
+    title: "5 Years",
+    text: "And this is only the beginning.",
+    video: undefined,
+  },
 ];
 
 function App() {
@@ -317,6 +334,15 @@ function TimelineRow({ item, index }: { item: (typeof timeline)[number]; index: 
       className={`relative grid items-center gap-8 md:grid-cols-2 ${isRight ? "md:[&>*:first-child]:order-2" : ""}`}
     >
       <div className="pl-12 md:pl-0">
+        {/* <div className={`pl-12 md:pl-0 ${isRight ? "md:pl-12" : "md:pr-12 md:text-right"}`}>
+        <div className="text-rose-gold font-serif text-6xl leading-none opacity-80">
+          {item.year}
+        </div>
+        <h3 className="text-gold mt-2 font-serif text-3xl">{item.title}</h3>
+        <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground md:ml-auto md:max-w-sm">
+          {item.text}
+        </p>
+      </div> */}
         <div className="text-rose-gold font-serif text-6xl leading-none opacity-80">
           {item.year}
         </div>
@@ -347,7 +373,7 @@ function TimelineRow({ item, index }: { item: (typeof timeline)[number]; index: 
 }
 
 function Gallery() {
-  const imgs = [hero, h1, y1, h2, y2, y3, h3, y4, y5, rose];
+  const imgs = [hero, h1, y1, y2, y3, y4, y5, y6, rose];
   const [active, setActive] = useState<number | null>(null);
   return (
     <section className="relative z-10 mx-auto max-w-6xl px-6 py-24">
@@ -409,25 +435,64 @@ function Moments() {
       <Heading eyebrow="Special Moments" title="Little Dates, Big Feelings" />
       <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {moments.map((m, i) => (
-          <motion.div
-            key={m.title}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: i * 0.08 }}
-            whileHover={{ y: -8 }}
-            className="glass relative overflow-hidden p-6"
-          >
-            <div className="text-xs uppercase tracking-[0.3em] text-rose-gold">{m.date}</div>
-            <h3 className="text-gold mt-3 font-serif text-2xl">{m.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{m.text}</p>
-            <div className="heart-pulse absolute -bottom-4 -right-4 text-6xl text-soft-pink/15">
-              ♥
-            </div>
-          </motion.div>
+          <MomentCard key={m.title} moment={m} index={i} />
         ))}
       </div>
     </section>
+  );
+}
+
+function MomentCard({ moment, index }: { moment: (typeof moments)[number]; index: number }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handleMouseEnter = () => {
+    if (videoRef.current && moment.video) {
+      videoRef.current.play().catch(() => {
+        // Auto-play might be blocked
+      });
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7, delay: index * 0.08 }}
+      whileHover={{ y: -8 }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className="glass group relative overflow-hidden p-6"
+    >
+      {moment.video && (
+        <div className="relative -m-6 mb-4 overflow-hidden rounded-lg bg-black/20">
+          <video
+            ref={videoRef}
+            src={moment.video}
+            className="aspect-video w-full object-cover"
+            muted
+            loop
+            playsInline
+          />
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-100">
+            <div className="rounded-full bg-soft-pink/20 p-3 backdrop-blur-sm">
+              <span className="text-2xl text-soft-pink">▶</span>
+            </div>
+          </div>
+        </div>
+      )}
+      <div className="text-xs uppercase tracking-[0.3em] text-rose-gold">{moment.date}</div>
+      <h3 className="text-gold mt-3 font-serif text-2xl">{moment.title}</h3>
+      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{moment.text}</p>
+      <div className="heart-pulse absolute -bottom-4 -right-4 text-6xl text-soft-pink/15">♥</div>
+    </motion.div>
   );
 }
 
