@@ -343,7 +343,7 @@ function TimelineRow({ item, index }: { item: (typeof timeline)[number]; index: 
         </div>
         <h3 className="text-gold mt-2 font-serif text-3xl">{item.title}</h3>
         <p
-          className={`mt-3 max-w-md text-sm leading-relaxed text-muted-foreground md:max-w-sm ${isRight ? "md:mr-auto" : "md:ml-auto"}`}
+          className={`mt-3 max-w-md text-sm leading-relaxed text-muted-foreground text-justify md:max-w-sm ${isRight ? "md:mr-auto" : "md:ml-auto"}`}
         >
           {item.text}
         </p>
