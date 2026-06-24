@@ -669,7 +669,7 @@ function LoveBurst() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-  const images = [h1, h2, h3, rose];
+  const images = [h1, h2, h3, y1, rose];
 
   const confetti = useMemo(
     () =>
@@ -727,7 +727,7 @@ function LoveBurst() {
                     delay: c.delay,
                     ease: "easeOut",
                   }}
-                  className="pointer-events-none absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full"
+                  className="pointer-events-none absolute left-2 top-2 h-3 w-3 -translate-x-2 -translate-y-2 rounded-full"
                   style={{
                     background: ["#d4af8c", "#f8c8dc", "#f8f2ea", "#d4af8c"][c.key % 4],
                   }}
@@ -741,7 +741,7 @@ function LoveBurst() {
               exit={{ scale: 0, opacity: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative h-72 w-72 sm:h-96 sm:w-96"
+              className="relative h-96 w-96 sm:h-[540px] sm:w-[540px]"
             >
               {/* Center text */}
               <motion.div
@@ -762,7 +762,7 @@ function LoveBurst() {
               {/* Circular images */}
               {images.map((img, idx) => {
                 const angle = (idx / images.length) * Math.PI * 2;
-                const radius = 110;
+                const radius = 160;
                 const x = Math.cos(angle) * radius;
                 const y = Math.sin(angle) * radius;
 
@@ -777,7 +777,7 @@ function LoveBurst() {
                       type: "spring",
                       stiffness: 100,
                     }}
-                    className="absolute w-24 h-24 sm:w-28 sm:h-28 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+                    className="absolute w-28 h-28 sm:w-32 sm:h-32 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
                     style={{ x, y }}
                     whileHover={{ scale: 1.1 }}
                   >
