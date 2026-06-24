@@ -13,6 +13,7 @@ import h1 from "@/assets/h1.jpg";
 import h2 from "@/assets/h2.jpg";
 import h3 from "@/assets/h3.jpg";
 import v1 from "@/assets/Videoes/v1.mp4";
+import v2 from "@/assets/Videoes/v2.mp4";
 
 const START = new Date("2021-06-25T00:00:00");
 const TARGET = new Date("2026-06-25T00:00:00");
@@ -329,21 +330,16 @@ function TimelineRow({ item, index }: { item: (typeof timeline)[number]; index: 
       transition={{ duration: 0.9, ease: [0.2, 0.8, 0.2, 1] }}
       className={`relative grid items-center gap-8 md:grid-cols-2 ${isRight ? "md:[&>*:first-child]:order-2" : ""}`}
     >
-      <div className="pl-12 md:pl-0">
-        {/* <div className={`pl-12 md:pl-0 ${isRight ? "md:pl-12" : "md:pr-12 md:text-right"}`}>
+      <div className={`pl-12 md:pl-0 ${isRight ? "md:pl-12" : "md:pr-12 md:text-right"}`}>
         <div className="text-rose-gold font-serif text-6xl leading-none opacity-80">
           {item.year}
         </div>
         <h3 className="text-gold mt-2 font-serif text-3xl">{item.title}</h3>
-        <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground md:ml-auto md:max-w-sm">
+        <p
+          className={`mt-3 max-w-md text-sm leading-relaxed text-muted-foreground md:max-w-sm ${isRight ? "md:ml-auto" : "md:mr-auto"}`}
+        >
           {item.text}
         </p>
-      </div> */}
-        <div className="text-rose-gold font-serif text-6xl leading-none opacity-80">
-          {item.year}
-        </div>
-        <h3 className="text-gold mt-2 font-serif text-3xl">{item.title}</h3>
-        <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">{item.text}</p>
       </div>
 
       <motion.div
@@ -378,8 +374,8 @@ function Gallery() {
     { src: y4, video: undefined },
     { src: y5, video: undefined },
     { src: y6, video: undefined },
-    { src: rose, video: undefined },
     { src: v1, video: v1 },
+    { src: v2, video: v2 },
   ];
   const [active, setActive] = useState<number | null>(null);
   return (
