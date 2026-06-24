@@ -377,7 +377,7 @@ function Gallery() {
     { src: y4, video: undefined },
     { src: y5, video: undefined },
     { src: y6, video: undefined },
-    { src: rose, video: "/videos/v1.mov" },
+    { src: rose, video: "/assets/Videoes/v1.MOV" },
   ];
   const [active, setActive] = useState<number | null>(null);
   return (
