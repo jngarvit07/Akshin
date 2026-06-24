@@ -8,18 +8,23 @@ import y3 from "@/assets/y3.jpg";
 import y4 from "@/assets/y4.jpg";
 import y5 from "@/assets/y5.jpg";
 import y6 from "@/assets/y6.jpg";
+import y7 from "@/assets/y7.jpg";
+import y8 from "@/assets/y9.jpg";
+import y9 from "@/assets/y9.jpg";
+import y10 from "@/assets/y10.jpg";
+import y11 from "@/assets/y11.jpg";
+import y12 from "@/assets/y12.jpg";
 import rose from "@/assets/rose.jpg";
-import h1 from "@/assets/h1.jpg";
-import h2 from "@/assets/h2.jpg";
-import h3 from "@/assets/h3.jpg";
+import old1 from "@/assets/old1.jpg";
 import v1 from "@/assets/Videoes/v1.mp4";
 import v2 from "@/assets/Videoes/v2.mp4";
-import audio from "@/assets/Audio_1.mp3";
+import v3 from "@/assets/Videoes/v3.mp4";
+import audio from "@/assets/Sukoon Mila.mp3";
 
 const START = new Date("2021-06-25T00:00:00");
-const TARGET = new Date("2026-06-25T00:00:00");
+const TARGET = new Date("2026-06-24T18:34:00");
 // EDITABLE: Change this to control when all sections unlock
-const UNLOCK_TIME = new Date("2026-06-24T23:59:59");
+const UNLOCK_TIME = new Date("2026-06-24T18:34:00");
 
 const timeline = [
   {
@@ -181,75 +186,22 @@ function SurpriseGate({
       >
         <Heading eyebrow="The Moment Approaches" title="Your Surprise Awaits" />
 
-        {/* Unlock Timer */}
-        {!isTimeReached ? (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mt-12 glass mx-auto inline-flex flex-wrap items-center justify-center gap-4 px-6 py-8 sm:gap-8 sm:px-10"
-          >
-            <div className="min-w-[60px] sm:min-w-[80px]">
-              <div className="text-gold font-serif text-3xl font-light sm:text-5xl">
-                {String(timeLeft.days).padStart(2, "0")}
-              </div>
-              <div className="mt-1 text-[10px] uppercase tracking-[0.3em] text-muted-foreground sm:text-xs">
-                Days
-              </div>
-            </div>
-            <div className="text-rose-gold text-xl">:</div>
-            <div className="min-w-[60px] sm:min-w-[80px]">
-              <div className="text-gold font-serif text-3xl font-light sm:text-5xl">
-                {String(timeLeft.hours).padStart(2, "0")}
-              </div>
-              <div className="mt-1 text-[10px] uppercase tracking-[0.3em] text-muted-foreground sm:text-xs">
-                Hours
-              </div>
-            </div>
-            <div className="text-rose-gold text-xl">:</div>
-            <div className="min-w-[60px] sm:min-w-[80px]">
-              <div className="text-gold font-serif text-3xl font-light sm:text-5xl">
-                {String(timeLeft.minutes).padStart(2, "0")}
-              </div>
-              <div className="mt-1 text-[10px] uppercase tracking-[0.3em] text-muted-foreground sm:text-xs">
-                Minutes
-              </div>
-            </div>
-            <div className="text-rose-gold text-xl">:</div>
-            <div className="min-w-[60px] sm:min-w-[80px]">
-              <div className="text-gold font-serif text-3xl font-light sm:text-5xl">
-                {String(timeLeft.seconds).padStart(2, "0")}
-              </div>
-              <div className="mt-1 text-[10px] uppercase tracking-[0.3em] text-muted-foreground sm:text-xs">
-                Seconds
-              </div>
-            </div>
-          </motion.div>
-        ) : (
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mt-12 font-serif text-2xl text-soft-pink"
-          >
-            ✨ The time has arrived! ✨
-          </motion.p>
-        )}
-
         {/* Center button - shows message if clicked before time */}
-        {!isTimeReached && (
-          <motion.button
-            onClick={handleEarlyClick}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-            className="mt-8 rounded-full border border-soft-pink/50 bg-soft-pink/10 px-6 py-2 text-sm font-serif italic tracking-wide transition-colors hover:bg-soft-pink/20"
-          >
-            ✨ Peek at your surprise? ✨
-          </motion.button>
-        )}
+        <motion.button
+          onClick={isTimeReached ? onUnlock : handleEarlyClick}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.3 }}
+          whileTap={{ scale: 0.98 }}
+          whileHover={{ scale: 1.08 }}
+          className={`glow-ring mt-10 rounded-full border border-rose-gold/50 px-8 py-4 text-lg font-serif italic tracking-wide backdrop-blur-md transition-all ${
+            isTimeReached
+              ? "bg-background/40 cursor-pointer hover:bg-rose-gold/20"
+              : "bg-background/20 cursor-pointer hover:bg-background/30"
+          }`}
+        >
+          {isTimeReached ? "🎁 Open Your Surprise 🎁" : "✨ Peek at your surprise? ✨"}
+        </motion.button>
 
         {/* Message that slides down */}
         <AnimatePresence>
@@ -284,7 +236,7 @@ function SurpriseGate({
         </AnimatePresence>
 
         {/* Unlock Button - only enabled after time reached */}
-        <motion.button
+        {/* <motion.button
           onClick={onUnlock}
           disabled={!isTimeReached}
           initial={{ opacity: 0, y: 20 }}
@@ -299,7 +251,7 @@ function SurpriseGate({
           }`}
         >
           {isTimeReached ? "🎁 Open Your Surprise 🎁" : "⏳ Waiting for the moment..."}
-        </motion.button>
+        </motion.button> */}
 
         <motion.p
           initial={{ opacity: 0 }}
@@ -448,13 +400,13 @@ function Hero() {
         </motion.a>
       </motion.div>
 
-      <motion.div
+      {/* <motion.div
         animate={{ y: [0, 12, 0] }}
         transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
         className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-xs tracking-[0.4em] text-foreground/60"
       >
         SCROLL
-      </motion.div>
+      </motion.div> */}
     </section>
   );
 }
@@ -512,7 +464,7 @@ function Countdown() {
 
 function Timeline() {
   return (
-    <section className="relative z-10 mx-auto max-w-6xl px-6 py-24">
+    <section className="relative z-10 mx-auto max-w-6xl px-6 py-15">
       <Heading eyebrow="Our Journey" title="A Love Story in Five Chapters… and Forever" />
       <div className="relative mt-16">
         <div
@@ -575,15 +527,20 @@ function TimelineRow({ item, index }: { item: (typeof timeline)[number]; index: 
 
 function Gallery() {
   const galleryItems = [
-    { src: hero, video: undefined },
     { src: y1, video: undefined },
     { src: y2, video: undefined },
     { src: y3, video: undefined },
     { src: y4, video: undefined },
     { src: y5, video: undefined },
     { src: y6, video: undefined },
+    { src: y7, video: undefined },
+    { src: y8, video: undefined },
+    { src: y9, video: undefined },
+    { src: y10, video: undefined },
+    { src: y11, video: undefined },
     { src: v1, video: v1 },
     { src: v2, video: v2 },
+    { src: v3, video: v3 },
   ];
   const [active, setActive] = useState<number | null>(null);
   return (
@@ -776,10 +733,10 @@ function AnimatedNumber({ to }: { to: number }) {
 function Stats() {
   const days = Math.max(0, Math.floor((Date.now() - START.getTime()) / 86400000));
   const items = [
-    { v: days, l: "Days Together" },
-    { v: 1200, l: "Photos Collected" },
-    { v: 14, l: "Trips Taken" },
-    { v: 1825, l: "Memories Made" },
+    { v: days, l: "Days Together", animated: true },
+    { v: "2345+", l: "Photos Captured" },
+    { v: "51+", l: "Dates & Meetings" },
+    { v: "∞", l: "Memories Made Together" },
   ];
   return (
     <section className="relative z-10 mx-auto max-w-6xl px-6 py-24">
@@ -795,7 +752,7 @@ function Stats() {
             className="glass p-6 text-center"
           >
             <div className="text-gold font-serif text-4xl font-light md:text-5xl">
-              <AnimatedNumber to={it.v} />
+              {it.animated ? <AnimatedNumber to={it.v} /> : it.v}
             </div>
             <div className="mt-2 text-[10px] uppercase tracking-[0.3em] text-muted-foreground md:text-xs">
               {it.l}
@@ -876,7 +833,7 @@ function LoveBurst() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-  const images = [h1, h2, h3, y1];
+  const images = [y5, y7, y8, old1];
 
   const confetti = useMemo(
     () =>
@@ -969,7 +926,7 @@ function LoveBurst() {
               {/* Circular images */}
               {images.map((img, idx) => {
                 const angle = (idx / images.length) * Math.PI * 2;
-                const radius = 190;
+                const radius = 200;
                 const x = Math.cos(angle) * radius;
                 const y = Math.sin(angle) * radius;
 
@@ -1006,7 +963,7 @@ function LoveBurst() {
               {/* Decorative hearts around */}
               {[...Array(8)].map((_, i) => {
                 const angle = (i / 8) * Math.PI * 2;
-                const radius = 190;
+                const radius = 200;
                 const x = Math.cos(angle) * radius;
                 const y = Math.sin(angle) * radius;
 
