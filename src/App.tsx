@@ -139,6 +139,8 @@ function SurpriseGate({
   timeUntilUnlock: Date;
 }) {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [showMessage, setShowMessage] = useState(false);
+  const [isTimeReached, setIsTimeReached] = useState(false);
 
   useEffect(() => {
     const updateTime = () => {
@@ -147,9 +149,11 @@ function SurpriseGate({
 
       if (diff <= 0) {
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        setIsTimeReached(true);
         return;
       }
 
+      setIsTimeReached(false);
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
       const minutes = Math.floor((diff / (1000 * 60)) % 60);
@@ -163,6 +167,11 @@ function SurpriseGate({
     return () => clearInterval(interval);
   }, [timeUntilUnlock]);
 
+  const handleEarlyClick = () => {
+    setShowMessage(true);
+    setTimeout(() => setShowMessage(false), 4000);
+  };
+
   return (
     <section className="relative z-10 mx-auto max-w-6xl px-6 py-24 text-center">
       <motion.div
@@ -173,7 +182,7 @@ function SurpriseGate({
         <Heading eyebrow="The Moment Approaches" title="Your Surprise Awaits" />
 
         {/* Unlock Timer */}
-        {timeLeft.days > 0 || timeLeft.hours > 0 || timeLeft.minutes > 0 || timeLeft.seconds > 0 ? (
+        {!isTimeReached ? (
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -227,17 +236,69 @@ function SurpriseGate({
           </motion.p>
         )}
 
-        {/* Unlock Button */}
+        {/* Center button - shows message if clicked before time */}
+        {!isTimeReached && (
+          <motion.button
+            onClick={handleEarlyClick}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.3 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+            className="mt-8 rounded-full border border-soft-pink/50 bg-soft-pink/10 px-6 py-2 text-sm font-serif italic tracking-wide transition-colors hover:bg-soft-pink/20"
+          >
+            ✨ Peek at your surprise? ✨
+          </motion.button>
+        )}
+
+        {/* Message that slides down */}
+        <AnimatePresence>
+          {showMessage && (
+            <motion.div
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -30 }}
+              transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
+              className="glass mt-6 mx-auto max-w-2xl rounded-2xl border border-soft-pink/30 bg-gradient-to-r from-soft-pink/10 to-rose-gold/10 p-6 shadow-2xl"
+            >
+              <motion.div
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="mb-3 text-3xl"
+              >
+                💝
+              </motion.div>
+              <h3 className="font-serif text-2xl font-light text-soft-pink mb-3">
+                Just a little longer...
+              </h3>
+              <p className="text-sm leading-relaxed text-foreground/80 max-w-xl">
+                The most magical moments are worth waiting for. Soon, you'll see all the memories,
+                all the moments, and everything that makes our story so beautiful. Until then, keep
+                the anticipation alive — the surprise is almost here. 💕
+              </p>
+              <p className="mt-4 text-xs text-rose-gold/80 tracking-widest uppercase">
+                Get ready for something special
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Unlock Button - only enabled after time reached */}
         <motion.button
           onClick={onUnlock}
+          disabled={!isTimeReached}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.4 }}
-          whileHover={{ scale: 1.08 }}
-          whileTap={{ scale: 0.95 }}
-          className="glow-ring mt-10 rounded-full border border-rose-gold/50 bg-background/40 px-8 py-4 text-lg font-serif italic tracking-wide backdrop-blur-md transition-colors hover:bg-rose-gold/20"
+          whileHover={isTimeReached ? { scale: 1.08 } : {}}
+          whileTap={isTimeReached ? { scale: 0.95 } : {}}
+          className={`glow-ring mt-10 rounded-full border border-rose-gold/50 px-8 py-4 text-lg font-serif italic tracking-wide backdrop-blur-md transition-all ${
+            isTimeReached
+              ? "bg-background/40 cursor-pointer hover:bg-rose-gold/20"
+              : "bg-background/20 cursor-not-allowed opacity-50"
+          }`}
         >
-          🎁 Open Your Surprise 🎁
+          {isTimeReached ? "🎁 Open Your Surprise 🎁" : "⏳ Waiting for the moment..."}
         </motion.button>
 
         <motion.p
@@ -246,8 +307,9 @@ function SurpriseGate({
           transition={{ duration: 1, delay: 0.6 }}
           className="mt-6 text-sm text-muted-foreground"
         >
-          Click the button or wait until {UNLOCK_TIME.toLocaleDateString()} at{" "}
-          {UNLOCK_TIME.toLocaleTimeString()} to unlock all the memories
+          {isTimeReached
+            ? "The wait is over! Click to unveil all the memories."
+            : `Unlock at ${UNLOCK_TIME.toLocaleDateString()} at ${UNLOCK_TIME.toLocaleTimeString()}`}
         </motion.p>
       </motion.div>
     </section>
